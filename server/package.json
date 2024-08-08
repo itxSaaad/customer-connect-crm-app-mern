@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node serve.js",
+    "dev": "nodemon serve.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itxSaaad/customer-connect-crm-app-mern.git"
+  },
+  "author": "Muhammad Saad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itxSaaad/customer-connect-crm-app-mern/issues"
+  },
+  "homepage": "https://github.com/itxSaaad/customer-connect-crm-app-mern#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
