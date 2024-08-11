@@ -1,37 +1,29 @@
-import { useState } from 'react';
 import './App.css';
-import reactLogo from './assets/react.svg';
 import { Button } from './components/ui/button';
-import viteLogo from '/vite.svg';
+import { Input } from './components/ui/input';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button
-          variant="secondary"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <header className="flex min-h-[100dvh] flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-md text-center">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            Coming Soon
+          </h1>
+          <p className="mt-4 text-muted-foreground">
+            Get ready for the launch of our exciting new product. Sign up below
+            to stay informed and be the first to know when it's available.
+          </p>
+          <form className="mt-6 flex gap-2">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1"
+            />
+            <Button type="submit">Notify Me</Button>
+          </form>
+        </div>
+      </header>
     </>
   );
 }
