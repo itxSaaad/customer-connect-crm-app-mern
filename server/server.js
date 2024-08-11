@@ -13,6 +13,9 @@ import xss from 'xss-clean';
 // Import Configs
 import connectDB from './config/database.js';
 
+// Import Routes
+import userRoutes from './routes/userRoutes.js';
+
 // Import Middlewares
 import {
   errorHandler,
@@ -88,6 +91,8 @@ app.get('/', (req, res) => {
     </section>`
   );
 });
+
+app.use('/api/v1/users', userRoutes);
 
 // Eror Handling Routes
 app.use(notFoundHandler);

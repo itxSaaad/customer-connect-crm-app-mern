@@ -27,7 +27,7 @@ class NotFoundError extends CustomAPIError {
 
 const notFoundHandler = (req, res) => {
   const err = new CustomAPIError(
-    `Route not found - ${req.originalUrl}`,
+    `Route not found - ${req.method}: ${req.originalUrl}`,
     StatusCodes.NOT_FOUND
   );
   res.status(StatusCodes.NOT_FOUND).json({ message: err.message });
