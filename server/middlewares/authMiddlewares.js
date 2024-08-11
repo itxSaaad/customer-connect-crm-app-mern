@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 
 import { UnauthenticatedError } from './errorMiddlewares.js';
 
+import User from '../models/userModel.js';
+
 const protect = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
@@ -22,7 +24,7 @@ const protect = async (req, res, next) => {
       process.env.JWT_SECRET || 'your-secret-key'
     );
 
-    req.user = await User.findById(decoded.userId).select('-password');
+    req.user = await User.findById(decoded.id).select('-password');
 
     next();
   } catch (error) {
@@ -42,4 +44,4 @@ const authorizeRoles = (...roles) => {
   };
 };
 
-export { protect };
+export { protect, authorizeRoles };

@@ -10,6 +10,9 @@ import morgan from 'morgan';
 import path from 'path';
 import xss from 'xss-clean';
 
+// Import Configs
+import connectDB from './config/database.js';
+
 // Import Middlewares
 import {
   errorHandler,
@@ -29,6 +32,9 @@ const app = express();
 
 // Get current directory
 const __dirname = path.resolve();
+
+// Connect Database
+connectDB();
 
 // Configure Middlewares
 
