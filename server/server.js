@@ -7,13 +7,14 @@ import express from 'express';
 import rateLimiter from 'express-rate-limit';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import path from 'path';
+// import path from 'path';
 import xss from 'xss-clean';
 
 // Import Configs
 import connectDB from './config/database.js';
 
 // Import Routes
+import customerRoutes from './routes/customerRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
 // Import Middlewares
@@ -34,7 +35,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // Get current directory
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 // Connect Database
 connectDB();
@@ -93,6 +94,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/customers', customerRoutes);
 
 // Eror Handling Routes
 app.use(notFoundHandler);
