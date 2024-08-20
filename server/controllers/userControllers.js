@@ -56,14 +56,14 @@ const registerUser = asyncHandler(async (req, res) => {
     } else {
       const userAlreadyExists = await User.findOne({ email });
 
-      if (userAlreadyExists) {
-        res.status(StatusCodes.BAD_REQUEST);
-        throw new Error('Email already in use');
-      } else {
+      if (!userAlreadyExists) {
         if (role === 'sales-rep' || role === 'manager') {
           const user = await User.create({ name, email, password, role });
 
-          if (user) {
+          if (!user) {
+            res.status(StatusCodes.BAD_REQUEST);
+            throw new Error('Invalid credentials');
+          } else {
             const token = user.generateAuthToken();
 
             res.status(StatusCodes.CREATED).json({
@@ -74,14 +74,14 @@ const registerUser = asyncHandler(async (req, res) => {
               },
               token,
             });
-          } else {
-            res.status(StatusCodes.BAD_REQUEST);
-            throw new Error('Invalid credentials');
           }
         } else {
           res.status(StatusCodes.BAD_REQUEST);
           throw new Error('Please provide a valid role');
         }
+      } else {
+        res.status(StatusCodes.BAD_REQUEST);
+        throw new Error('User already exists');
       }
     }
   }
