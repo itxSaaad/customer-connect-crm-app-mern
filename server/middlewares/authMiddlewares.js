@@ -39,14 +39,15 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 });
 // Middleware for role-based access control
-const authorizeRoles = asyncHandler(async (req, res, next, ...roles) => {
-  if (roles.includes(req.user.role)) {
-    next();
-  } else {
-    return res
-      .status(StatusCodes.FORBIDDEN)
-      .json({ message: 'Forbidden to access this route' });
-  }
-});
-
+const authorizeRoles = (...roles) => {
+  return asyncHandler(async (req, res, next) => {
+    if (roles.includes(req.user.role)) {
+      next();
+    } else {
+      return res
+        .status(StatusCodes.FORBIDDEN)
+        .json({ message: 'Forbidden to access this route' });
+    }
+  });
+};
 export { authorizeRoles, protect };
