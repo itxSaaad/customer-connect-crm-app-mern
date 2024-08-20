@@ -1,33 +1,31 @@
 import emailValidator from 'email-validator';
+import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 
 import User from '../models/userModel.js';
-
-import asyncHandler from '../middlewares/asyncMiddleware.js';
-import {
-  BadRequestError,
-  NotFoundError,
-  UnauthenticatedError,
-} from '../middlewares/errorMiddlewares.js';
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new BadRequestError('Please provide email and password');
+    res.status(StatusCodes.BAD_REQUEST);
+    throw new Error('Please provide email and password');
   } else {
     if (!emailValidator.validate(email)) {
-      throw new BadRequestError('Please provide a valid email');
+      res.status(StatusCodes.BAD_REQUEST);
+      throw new Error('Please provide a valid email');
     } else {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new UnauthenticatedError('Invalid credentials');
+        res.status(StatusCodes.NOT_FOUND);
+        throw new Error('Invalid credentials');
       } else {
         const isPasswordCorrect = await user.comparePassword(password);
 
         if (!isPasswordCorrect) {
-          throw new UnauthenticatedError('Invalid credentials');
+          res.status(StatusCodes.UNAUTHORIZED);
+          throw new Error('Invalid credentials');
         } else {
           const token = user.generateAuthToken();
 
@@ -49,15 +47,18 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, role } = req.body;
 
   if (!name || !email || !password) {
-    throw new BadRequestError('Please provide all values');
+    res.status(StatusCodes.BAD_REQUEST);
+    throw new Error('Please provide all values');
   } else {
     if (!emailValidator.validate(email)) {
-      throw new BadRequestError('Please provide a valid email');
+      res.status(StatusCodes.BAD_REQUEST);
+      throw new Error('Please provide a valid email');
     } else {
       const userAlreadyExists = await User.findOne({ email });
 
       if (userAlreadyExists) {
-        throw new BadRequestError('Email already in use');
+        res.status(StatusCodes.BAD_REQUEST);
+        throw new Error('Email already in use');
       } else {
         if (role === 'sales-rep' || role === 'manager') {
           const user = await User.create({ name, email, password, role });
@@ -74,10 +75,12 @@ const registerUser = asyncHandler(async (req, res) => {
               token,
             });
           } else {
-            throw new UnauthenticatedError('Invalid credentials');
+            res.status(StatusCodes.BAD_REQUEST);
+            throw new Error('Invalid credentials');
           }
         } else {
-          throw new BadRequestError('Please provide a valid role');
+          res.status(StatusCodes.BAD_REQUEST);
+          throw new Error('Please provide a valid role');
         }
       }
     }
@@ -96,6 +99,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       },
     });
   } else {
+    res.status(StatusCodes.NOT_FOUND);
     throw new NotFoundError('User not found');
   }
 });
