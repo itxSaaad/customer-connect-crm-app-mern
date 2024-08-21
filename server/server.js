@@ -15,6 +15,7 @@ import connectDB from './config/database.js';
 
 // Import Routes
 import customerRoutes from './routes/customerRoutes.js';
+import interactionRoutes from './routes/interactionRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
 // Import Middlewares
@@ -95,6 +96,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/customers', customerRoutes);
+app.use('/api/v1/interactions', interactionRoutes);
 
 // Eror Handling Routes
 app.use(notFoundHandler);

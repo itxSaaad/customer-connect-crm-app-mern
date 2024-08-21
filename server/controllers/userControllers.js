@@ -4,6 +4,18 @@ import { StatusCodes } from 'http-status-codes';
 
 import User from '../models/userModel.js';
 
+/**
+ * @desc Logs in a user.
+ * @route POST /api/v1/users/login
+ * @access Public
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the email or password is missing, or if the email is invalid, or if the credentials are invalid.
+ *
+ */
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -42,6 +54,17 @@ const loginUser = asyncHandler(async (req, res) => {
     }
   }
 });
+
+/**
+ * @desc Registers a new user.
+ * @route POST /api/v1/users/register
+ * @access Public
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the registration fails.
+ */
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -86,6 +109,17 @@ const registerUser = asyncHandler(async (req, res) => {
     }
   }
 });
+
+/**
+ * @desc Gets the user profile.
+ * @route GET /api/v1/users/profile
+ * @access Private
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {NotFoundError} If the user is not found.
+ */
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id);

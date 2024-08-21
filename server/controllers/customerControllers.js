@@ -3,6 +3,17 @@ import { StatusCodes } from 'http-status-codes';
 
 import Customer from '../models/customerModel.js';
 
+/**
+ * @desc Registers a new customer.
+ * @route POST /api/v1/customers
+ * @access Private Or Admin
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the registration fails.
+ */
+
 const createCustomer = asyncHandler(async (req, res) => {
   const { name, contactInfo, company, address, industry, notes } = req.body;
 
@@ -36,6 +47,16 @@ const createCustomer = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @desc Gets all customers.
+ * @route GET /api/v1/customers
+ * @access Private
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ */
+
 const getAllCustomers = asyncHandler(async (req, res) => {
   const customers = await Customer.find({}).populate('interactions');
 
@@ -46,6 +67,17 @@ const getAllCustomers = asyncHandler(async (req, res) => {
     throw new Error('No customers found');
   }
 });
+
+/**
+ * @desc Gets a customer by ID.
+ * @route GET /api/v1/customers/:id
+ * @access Private
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {NotFoundError} If the customer is not found.
+ */
 
 const getCustomerById = asyncHandler(async (req, res) => {
   const customer = await Customer.findById(req.params.id).populate(
@@ -59,6 +91,17 @@ const getCustomerById = asyncHandler(async (req, res) => {
     throw new Error('Customer not found');
   }
 });
+
+/**
+ * @desc Updates a customer.
+ * @route PUT /api/v1/customers/:id
+ * @access Private Or Admin
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {NotFoundError} If the customer is not found.
+ */
 
 const updateCustomer = asyncHandler(async (req, res) => {
   const { name, contactInfo, company, address, industry, notes } = req.body;
@@ -91,6 +134,17 @@ const updateCustomer = asyncHandler(async (req, res) => {
     throw new Error('Customer not found');
   }
 });
+
+/**
+ * @desc Deletes a customer.
+ * @route DELETE /api/v1/customers/:id
+ * @access Private & Admin
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {NotFoundError} If the customer is not found.
+ */
 
 const deleteCustomer = asyncHandler(async (req, res) => {
   const customer = await Customer.findById(req.params.id);
