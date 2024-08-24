@@ -62,19 +62,29 @@ const createOpportunity = asyncHandler(async (req, res) => {
         res.status(StatusCodes.BAD_REQUEST);
         throw new Error('Lead is required');
       } else {
-        const opportunity = await Opportunity.create({
-          name,
-          value,
-          stage,
-          expectedCloseDate,
-          lead,
-        });
+        const leadExists = await Lead.findById(lead);
 
-        if (!opportunity) {
-          res.status(StatusCodes.BAD_REQUEST);
-          throw new Error('Opportunity not created');
+        if (!lead) {
+          res.status(StatusCodes.NOT_FOUND);
+          throw new Error('Lead not found');
         } else {
-          res.status(StatusCodes.CREATED).json(opportunity);
+          const opportunity = await Opportunity.create({
+            name,
+            value,
+            stage,
+            expectedCloseDate,
+            lead,
+          });
+
+          if (!opportunity) {
+            res.status(StatusCodes.BAD_REQUEST);
+            throw new Error('Opportunity not created');
+          } else {
+            leadExists.opportunities.push(opportunity._id);
+            await leadExists.save();
+
+            res.status(StatusCodes.CREATED).json(opportunity);
+          }
         }
       }
     }
