@@ -6,15 +6,15 @@
 <div align="center">
   <p align="center">
     <br />
-    <a href="https://github.com/itxSaaad/customer-connect-crm-app-mern">
+    <a href="https://github.com/codesBySaad/customer-connect-crm-app-mern">
     <strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://customer-connect-crm-app-mern.vercel.app/">View Demo</a>
     ·
-    <a href="https://github.com/itxSaaad/customer-connect-crm-app-mern/issues">Report Bug</a>
+    <a href="https://github.com/codesBySaad/customer-connect-crm-app-mern/issues">Report Bug</a>
     ·
-    <a href="https://github.com/itxSaaad/customer-connect-crm-app-mern/issues">Request Feature</a>
+    <a href="https://github.com/codesBySaad/customer-connect-crm-app-mern/issues">Request Feature</a>
   </p>
 </div>
 
@@ -89,7 +89,7 @@
 1.Clone the repo
 
 ```sh
-git clone https://github.com/itxSaaad/customer-connect-crm-app-mern.git
+git clone https://github.com/codesBySaad/customer-connect-crm-app-mern.git
 ```
 
 2.Install NPM packages
@@ -137,9 +137,9 @@ Don't forget to give the project a star! Thanks again!
 
 ## Contact
 
-- Twitter: [@itxSaaad](https://twitter.com/itxSaaad)
-- LinkedIn: [@itxSaaad](https://www.linkedin.com/in/itxsaaad/)
-- Bento: [@itxSaaad](https://bento.me/itxsaaad)
+- Twitter: [@codesBySaad](https://twitter.com/codesBySaad)
+- LinkedIn: [@codesBySaad](https://www.linkedin.com/in/codesBySaad/)
+- Bento: [@codesBySaad](https://bento.me/codesBySaad)
 - Email: [saadstudent.cs@gmail.com](mailto:saadstudent.cs@gmail.com)
 
 ## License
@@ -154,13 +154,13 @@ Give ⭐️ if you like this project!
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/itxSaaad/customer-connect-crm-app-mern.svg?style=for-the-badge
-[contributors-url]: https://github.com/itxSaaad/customer-connect-crm-app-mern/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/itxSaaad/customer-connect-crm-app-mern.svg?style=for-the-badge
-[forks-url]: https://github.com/itxSaaad/customer-connect-crm-app-mern/network/members
-[stars-shield]: https://img.shields.io/github/stars/itxSaaad/customer-connect-crm-app-mern.svg?style=for-the-badge
-[stars-url]: https://github.com/itxSaaad/customer-connect-crm-app-mern/stargazers
-[issues-shield]: https://img.shields.io/github/issues/itxSaaad/customer-connect-crm-app-mern.svg?style=for-the-badge
-[issues-url]: https://github.com/itxSaaad/customer-connect-crm-app-mern/issues
-[license-shield]: https://img.shields.io/github/license/itxSaaad/customer-connect-crm-app-mern.svg?style=for-the-badge
-[license-url]: https://github.com/itxSaaad/customer-connect-crm-app-mern/blob/main/LICENSE.md
+[contributors-shield]: https://img.shields.io/github/contributors/codesBySaad/customer-connect-crm-app-mern.svg?style=for-the-badge
+[contributors-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/codesBySaad/customer-connect-crm-app-mern.svg?style=for-the-badge
+[forks-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/network/members
+[stars-shield]: https://img.shields.io/github/stars/codesBySaad/customer-connect-crm-app-mern.svg?style=for-the-badge
+[stars-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/stargazers
+[issues-shield]: https://img.shields.io/github/issues/codesBySaad/customer-connect-crm-app-mern.svg?style=for-the-badge
+[issues-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/issues
+[license-shield]: https://img.shields.io/github/license/codesBySaad/customer-connect-crm-app-mern.svg?style=for-the-badge
+[license-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/blob/main/LICENSE.md
