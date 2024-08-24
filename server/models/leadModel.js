@@ -5,11 +5,14 @@ const leadSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  contactInfo: { type: String },
+  contactInfo: {
+    email: String,
+    phone: String,
+  },
   source: { type: String },
   status: {
     type: String,
-    enum: ['New', 'In Progress', 'Converted', 'Lost'],
+    enum: ['New', 'Contacted', 'Qualified', 'Lost', 'Won'],
     default: 'New',
   },
   salesRepresentative: {
@@ -22,6 +25,10 @@ const leadSchema = new mongoose.Schema({
       ref: 'Opportunity',
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Lead = mongoose.model('Lead', leadSchema);
