@@ -2,10 +2,21 @@ import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 
 import Lead from '../models/leadModel.js';
-import User from '../models/userModel.js';
 import Opportunity from '../models/opportunityModel.js';
 
-const getLeads = asyncHandler(async (req, res) => {
+/**
+ * @desc Gets leads.
+ * @route GET /api/v1/leads
+ * @access Private
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the leads are not found.
+ *
+ */
+
+const getAllLeads = asyncHandler(async (req, res) => {
   const query = {};
 
   if (req.query.status) {
@@ -31,6 +42,18 @@ const getLeads = asyncHandler(async (req, res) => {
     res.status(StatusCodes.OK).json(leads);
   }
 });
+
+/**
+ * @desc Creates a lead.
+ * @route POST /api/v1/leads
+ * @access Private (Sales/Admin)
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the lead is not created.
+ *
+ */
 
 const createLead = asyncHandler(async (req, res) => {
   const {
@@ -64,6 +87,18 @@ const createLead = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @desc Gets a lead by ID.
+ * @route GET /api/v1/leads/:id
+ * @access Private
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the lead is not found.
+ *
+ */
+
 const getLeadById = asyncHandler(async (req, res) => {
   const lead = await Lead.findById(req.params.id)
     .populate('salesRepresentative')
@@ -76,6 +111,18 @@ const getLeadById = asyncHandler(async (req, res) => {
     res.status(StatusCodes.OK).json(lead);
   }
 });
+
+/**
+ * @desc Updates a lead.
+ * @route PUT /api/v1/leads/:id
+ * @access Private (Sales/Admin)
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the lead is not found.
+ *
+ */
 
 const updateLead = asyncHandler(async (req, res) => {
   const {
@@ -108,6 +155,18 @@ const updateLead = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+ * @desc Deletes a lead.
+ * @route DELETE /api/v1/leads/:id
+ * @access Private (Sales/Admin)
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>}
+ * @throws {Error} If the lead is not found.
+ *
+ */
+
 const deleteLead = asyncHandler(async (req, res) => {
   const lead = await Lead.findById(req.params.id);
 
@@ -115,13 +174,25 @@ const deleteLead = asyncHandler(async (req, res) => {
     res.status(StatusCodes.NOT_FOUND);
     throw new Error('Lead not found');
   } else {
-    await Opportunity.deleteMany({
-      _id: { $in: lead._id },
-    });
+    const opportunities = lead.opportunities;
 
-    await lead.deleteOne();
+    let opportunity;
+
+    for (let i = 0; i < opportunities.length; i++) {
+      opportunity = await Opportunity.findById(opportunities[i]);
+
+      if (!opportunity) {
+        res.status(StatusCodes.NOT_FOUND);
+        throw new Error('Opportunity not found');
+      } else {
+        await Opportunity.DeleteOne({ _id: opportunities[i] });
+      }
+    }
+
+    await Lead.DeleteOne({ _id: req.params.id });
+
     res.status(StatusCodes.OK).json({ message: 'Lead removed' });
   }
 });
 
-export { getLeads, createLead, getLeadById, updateLead, deleteLead };
+export { createLead, deleteLead, getAllLeads, getLeadById, updateLead };

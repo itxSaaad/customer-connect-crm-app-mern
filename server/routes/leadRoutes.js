@@ -4,7 +4,7 @@ import {
   createLead,
   deleteLead,
   getLeadById,
-  getLeads,
+  getAllLeads,
   updateLead,
 } from '../controllers/leadControllers.js';
 
@@ -14,7 +14,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(protect, getLeads)
+  .get(protect, getAllLeads)
   .post(protect, authorizeRoles('admin', 'sales-rep'), createLead);
 
 router
