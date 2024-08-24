@@ -162,7 +162,7 @@ const deleteInteraction = asyncHandler(async (req, res) => {
     res.status(StatusCodes.NOT_FOUND);
     throw new Error('Interaction not found');
   } else {
-    await interaction.remove();
+    await interaction.deleteOne();
     res.status(StatusCodes.OK).json({ message: 'Interaction removed' });
   }
 });
