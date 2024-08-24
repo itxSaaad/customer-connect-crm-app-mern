@@ -17,7 +17,7 @@ import connectDB from './config/database.js';
 import customerRoutes from './routes/customerRoutes.js';
 import interactionRoutes from './routes/interactionRoutes.js';
 import leadRoutes from './routes/leadRoutes.js';
-// import opportunityRoutes from './routes/opportunityRoutes.js';
+import opportunityRoutes from './routes/opportunityRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 
 // Import Middlewares
@@ -99,7 +99,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/interactions', interactionRoutes);
 app.use('/api/v1/leads', leadRoutes);
-// app.use('/api/v1/opportunities', opportunityRoutes);
+app.use('/api/v1/opportunities', opportunityRoutes);
 app.use('/api/v1/users', userRoutes);
 
 // Eror Handling Routes
