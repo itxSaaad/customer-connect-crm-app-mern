@@ -96,6 +96,10 @@ app.get('/', (req, res) => {
   );
 });
 
+app.get(['/api', '/api/health'], (req, res) => {
+  res.status(200).json({ service: 'customer-connect-api', status: 'ok' });
+});
+
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/interactions', interactionRoutes);
 app.use('/api/v1/leads', leadRoutes);
