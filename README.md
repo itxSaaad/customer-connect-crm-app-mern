@@ -1,5 +1,19 @@
 # CustomerConnect CRM App - MERN
 
+## Architecture
+
+```mermaid
+flowchart LR
+  Team[Sales or support user] -->|manage contacts, leads, and customer work| Client[React CRM interface\nVercel Services: frontend]
+  Client -->|HTTP API requests| Server[Express and Node.js API\nVercel Services: backend]
+  Server --> Routes[Routes and controllers]
+  Routes --> DB[(MongoDB)]
+  DB --> Routes
+  Routes --> Server
+  Server --> Client
+  Client -->|updated records and activity| Team
+```
+
 > CustomerConnect CRM is a comprehensive Customer Relationship Management (CRM) application designed to streamline customer data management, sales processes, and team collaboration. Built with the MERN stack (MongoDB, Express, React, Node.js), this application provides robust features for managing customer interactions, sales pipelines, and generating insightful reports.
 
 <br />
@@ -164,3 +178,8 @@ Give ⭐️ if you like this project!
 [issues-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/issues
 [license-shield]: https://img.shields.io/github/license/codesBySaad/customer-connect-crm-app-mern.svg?style=for-the-badge
 [license-url]: https://github.com/codesBySaad/customer-connect-crm-app-mern/blob/main/LICENSE.md
+
+## Vercel Deployment
+Vite client client/ + Express API server/server.js. Set Vercel framework to Services and configure MongoDB/authentication environment values. Ensure the client API base targets this project origin.
+See the repository-root [vercel.json](./vercel.json) for build roots and routing. Configure private values in Vercel Project Settings; never commit secrets.
+
